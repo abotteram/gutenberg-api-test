@@ -41,7 +41,7 @@ const Component = () => {
 			</PluginSidebar> }
 			{ MORE_MENU_ITEM && <PluginMoreMenuItem
 				name="more-menu-item"
-				title="My sidebar"
+				label="My sidebar"
 				icon={ Icon }
 				target="my-sidebar"
 				type="sidebar"/> }
