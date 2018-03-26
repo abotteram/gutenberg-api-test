@@ -16,7 +16,6 @@ function is_gutenberg_editor_open( $hook ) {
 	if( ! is_plugin_active( "gutenberg-api-test/gutenberg-api-test.php" ) ) {
 		return false;
 	}
-	global $wp_query;
 	if( ( $hook == 'post-new.php' || $hook == 'post.php' ) && ! isset( $_GET[ 'classic-editor' ] ) ) {
 		return true;
 	}
