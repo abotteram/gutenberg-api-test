@@ -41,10 +41,11 @@ const Component = () => {
 			</PluginSidebar> }
 			{ MORE_MENU_ITEM && <PluginMoreMenuItem
 				name="more-menu-item"
-				label="My sidebar"
 				icon={ Icon }
 				target="my-sidebar"
-				type="sidebar"/> }
+				type="sidebar">
+				My Sidebar
+			</PluginMoreMenuItem>}
 		</Fragment>
 	);
 };
