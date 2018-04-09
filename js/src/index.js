@@ -2,16 +2,21 @@ const {
 	registerPlugin,
 } = wp.plugins;
 const {
-	PluginSidebar,
 	PluginMoreMenuItem,
 	PluginScreenTakeover,
 } = wp.editPost.__experimental;
+const {
+	PluginSidebar,
+} = wp.editPost;
 const {
 	Fragment
 } = wp.element;
 const {
 	dispatch,
 } = wp.data;
+const {
+	PanelBody,
+} = wp.components;
 
 const SIDEBAR = !! PluginSidebar;
 const MORE_MENU_ITEM = !! PluginMoreMenuItem;
@@ -36,10 +41,10 @@ const SidebarContents = ( props ) => {
 const ScreenTakeoverContents = ( props ) => {
 	const onClose = dispatch( "core/edit-post" ).closeScreenTakeover;
 	return (
-		<div>
+		<PanelBody>
 			<p>Here is the screen takeover content!</p>
 			<button onClick={ onClose }>Close</button>
-		</div>
+		</PanelBody>
 	);
 };
 
