@@ -41,10 +41,10 @@ const SidebarContents = ( props ) => {
 const ScreenTakeoverContents = ( props ) => {
 	const onClose = dispatch( "core/edit-post" ).closeScreenTakeover;
 	return (
-		<PanelBody>
-			<p>Here is the screen takeover content!</p>
+		<div>
+			<p>Here is the sidebar content!</p>
 			<button onClick={ onClose }>Close</button>
-		</PanelBody>
+		</div>
 	);
 };
 
@@ -62,6 +62,8 @@ const Component = () => {
 				My Sidebar
 			</PluginMoreMenuItem>}
 			{ SCREEN_TAKEOVER && <PluginScreenTakeover
+				icon={ Icon }
+				title="My Screen Takeover"
 				name="my-screen-takeover">
 				<ScreenTakeoverContents />
 			</PluginScreenTakeover> }
