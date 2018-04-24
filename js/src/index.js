@@ -1,12 +1,14 @@
 const {
 	registerPlugin,
 } = wp.plugins;
+const experimental = wp.editPost.__experimental || {};
 const {
-	PluginMoreMenuItem,
 	PluginScreenTakeover,
-} = wp.editPost.__experimental;
+	PluginScreenTakeoverMoreMenuItem,
+} = experimental;
 const {
 	PluginSidebar,
+	PluginSidebarMoreMenuItem,
 } = wp.editPost;
 const {
 	Fragment
@@ -19,8 +21,10 @@ const {
 } = wp.components;
 
 const SIDEBAR = !! PluginSidebar;
-const MORE_MENU_ITEM = !! PluginMoreMenuItem;
+const SIDEBAR_MORE_MENU_ITEM = !! PluginSidebarMoreMenuItem;
 const SCREEN_TAKEOVER = !! PluginScreenTakeover;
+const SCREEN_TAKEOVER_MORE_MENU_ITEM = !! PluginScreenTakeoverMoreMenuItem;
+
 
 const Icon = (
 	<svg width="100%" height="100%" viewBox="0 0 100 100">
@@ -54,26 +58,27 @@ const Component = () => {
 			{ SIDEBAR && <PluginSidebar name="my-sidebar" title="My sidebar">
 				<SidebarContents />
 			</PluginSidebar> }
-			{ MORE_MENU_ITEM && SIDEBAR && <PluginMoreMenuItem
-				name="more-menu-item-sidebar"
+			{ SIDEBAR_MORE_MENU_ITEM && SIDEBAR && <PluginSidebarMoreMenuItem
 				icon={ Icon }
-				target="my-sidebar"
-				type="sidebar">
+				target="my-sidebar">
 				My Sidebar
-			</PluginMoreMenuItem>}
+			</PluginSidebarMoreMenuItem>}
+			{ SIDEBAR_MORE_MENU_ITEM && SIDEBAR && <PluginSidebarMoreMenuItem
+				icon={ Icon }
+				target="my-sidebar">
+				My same sidebar
+			</PluginSidebarMoreMenuItem>}
 			{ SCREEN_TAKEOVER && <PluginScreenTakeover
 				icon={ Icon }
 				title="My Screen Takeover"
 				name="my-screen-takeover">
 				<ScreenTakeoverContents />
 			</PluginScreenTakeover> }
-			{ MORE_MENU_ITEM && SCREEN_TAKEOVER && <PluginMoreMenuItem
-				name="more-menu-item-screen-takeover"
+			{ SCREEN_TAKEOVER_MORE_MENU_ITEM && SCREEN_TAKEOVER && <PluginScreenTakeoverMoreMenuItem
 				icon={ Icon }
-				target="my-screen-takeover"
-				type="screen-takeover">
+				target="my-screen-takeover">
 				My Screen Takeover
-			</PluginMoreMenuItem> }
+			</PluginScreenTakeoverMoreMenuItem> }
 		</Fragment>
 	);
 };
