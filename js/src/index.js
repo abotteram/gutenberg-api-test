@@ -1,3 +1,5 @@
+import Content from './content';
+
 const {
 	registerPlugin,
 } = wp.plugins;
@@ -11,13 +13,14 @@ const {
 	PluginSidebarMoreMenuItem,
 } = wp.editPost;
 const {
-	Fragment
+	Fragment,
+	Component,
 } = wp.element;
 const {
 	dispatch,
 } = wp.data;
 const {
-	PanelBody,
+	Modal,
 } = wp.components;
 
 const SIDEBAR = !! PluginSidebar;
@@ -36,6 +39,7 @@ const SidebarContents = ( props ) => {
 	const onClose = dispatch( "core/edit-post" ).closeGeneralSidebar;
 	return (
 		<div>
+			<ModalWrapper />
 			<p>Here is the sidebar content!</p>
 			<button onClick={ onClose }>Close</button>
 		</div>
@@ -52,7 +56,47 @@ const ScreenTakeoverContents = ( props ) => {
 	);
 };
 
-const Component = () => {
+class ModalWrapper extends Component {
+	constructor() {
+		super( ...arguments );
+
+		this.state = {
+			isOpen: false,
+		};
+
+		this.onOpen = this.onOpen.bind( this );
+		this.onClose = this.onClose.bind( this );
+	}
+
+	onOpen() {
+		this.setState( {
+			isOpen: true,
+		} );
+	}
+
+	onClose() {
+		this.setState( {
+			isOpen: false,
+		} );
+	}
+
+	render() {
+		return (
+			<Fragment>
+				<button onClick={ this.onOpen }>Open modal</button>
+				<Modal
+					title="My Modal"
+					onRequestClose={ this.onClose }
+					isOpen={ this.state.isOpen }>
+					<button onClick={ this.onClose }>Close</button>
+					<Content />
+				</Modal>
+			</Fragment>
+		);
+	}
+}
+
+const PluginComponent = () => {
 	return (
 		<Fragment>
 			{ SIDEBAR && <PluginSidebar name="my-sidebar" title="My sidebar">
@@ -84,5 +128,5 @@ const Component = () => {
 };
 
 registerPlugin( "my-plugin", {
-	render: Component,
+	render: PluginComponent,
 } );
