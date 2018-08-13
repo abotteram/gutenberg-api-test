@@ -83,14 +83,14 @@ class ModalWrapper extends Component {
 	render() {
 		return (
 			<Fragment>
-				<button onClick={ this.onOpen }>Open modal</button>
+				{ this.state.isOpen ?
 				<Modal
+					className="gutenberg-api-test-modal"
 					title="My Modal"
-					onRequestClose={ this.onClose }
-					isOpen={ this.state.isOpen }>
+					onRequestClose={ this.onClose }>
 					<button onClick={ this.onClose }>Close</button>
-					<Content />
-				</Modal>
+				</Modal> : null }
+				<button onClick={ this.onOpen }>Open modal</button>
 			</Fragment>
 		);
 	}

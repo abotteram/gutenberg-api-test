@@ -8,7 +8,9 @@ add_action( "admin_enqueue_scripts", "gat_enqueue_scripts" );
 function gat_enqueue_scripts( $hook ) {
 	if( is_gutenberg_editor_open( $hook ) ) {
 		wp_register_script( "gat-gutenberg-plugin", plugins_url( "js/dist/gutenberg-plugin.js", __FILE__ ), array( "wp-edit-post", "react", "react-dom" ), "1.0.0", true );
+		wp_register_style( "gat-gutenberg-plugin-style", plugins_url( "js/dist/gutenberg-plugin.css", __FILE__ ) );
 		wp_enqueue_script( "gat-gutenberg-plugin" );
+		wp_enqueue_style( "gat-gutenberg-plugin-style" );
 	}
 }
 
